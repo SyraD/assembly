@@ -13,3 +13,7 @@ A value of 1 is passed for Linux exit().
 
 Removing int 0x80 will cause a seg. fault. 
 
+More about interrupts:
+https://wiki.osdev.org/Interrupts
+
+

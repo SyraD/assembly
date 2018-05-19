@@ -1,0 +1,19 @@
+Syscalls are defined by the kernel.
+For linux: https://github.com/torvalds/linux/blob/master/arch/x86/entry/syscalls/syscall_64.tbl
+
+A syscall is the preferred way in x86 for a program to enter the kernel for a task.
+man syscall
+man syscalls
+
+The kernel runs at the most privileged level, called “Ring 0”. User programs run at a lesser level, typically “Ring 3”.
+
+In order for a user program to perform some privileged operation, it must cause a privilege level change (from “Ring 3” to “Ring 0”) so that the kernel can execute.
+
+There are several ways to cause a privilege level change and trigger the kernel to perform some action: interrupt (int), model specific registers (rdmsr, wrmsr), and the newer "fast system calls": syscall/sysret.
+
+
+linux handles the iret (program return).
+
+
+
+

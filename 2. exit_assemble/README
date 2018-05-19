@@ -1,0 +1,15 @@
+exploration into exiting a program in AS
+
+fin performs a software interrupr by calling int (short for interrupt) 0x80.
+Int 0x80 is a legacy way to invoke a system call.
+
+First, required arguments are passed to the registers.
+
+Then, int 0x80 passes control to the interrupt vector. Program flow is transfered to  the interrupt handler. In linux, the kernel handles 0x80 interrupts. 
+
+Then, the value of RAX (64) or EAX (32) defines the system call. 
+
+A value of 1 is passed for Linux exit().
+
+Removing int 0x80 will cause a seg. fault. 
+

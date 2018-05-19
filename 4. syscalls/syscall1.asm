@@ -23,7 +23,7 @@ _write_msg:
     ;syswrite(rdi=int fd, rsi=const void *buf, rdx=size_t count)
 
         ;rax is the temp register, stores number for syscall
-        mov rax,1  
+        mov rax,SYS_WRITE 
 
         mov rdi,STDOUT   ; file descriptor stored in rdi
         mov rsi, msg    ;mov message to rsiov 1 status code

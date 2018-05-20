@@ -6,6 +6,8 @@ refer to:
 man syscall
 man syscalls
 
+Linux uses the System V API for x86-64 (AMD64) architecture (https://wiki.osdev.org/System_V_ABI#x86_64)
+
 The kernel runs at the most privileged level, called “Ring 0”. User programs run at a lesser level, typically “Ring 3”.
 
 In order for a user program to perform some privileged operation, it must cause a privilege level change (from “Ring 3” to “Ring 0”) so that the kernel can execute.

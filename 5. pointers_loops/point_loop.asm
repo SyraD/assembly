@@ -3,7 +3,7 @@
 
 section	.data           ;section defines nasm constants
 
-    NULL_TERMINATOR equ 10;\0 aka 0
+    NULL_TERMINATOR equ 0; aka /0
 
     ;initialize message
     msg: db "Program running",10 ;10 for new line
@@ -23,8 +23,8 @@ _strlen:
     xor rcx,rcx
 
 _strlen_next:
-    cmp [rdi], byte 0
-    jz  _fin
+    cmp [rdi], byte NULL_TERMINATOR
+    je _calc_length
     
     inc rcx
     inc rdi
@@ -32,7 +32,6 @@ _strlen_next:
 
 _calc_length:
     mov rax, rcx
-    ret
    
 _write_msg:
 ;syscall API defined in linux kernel

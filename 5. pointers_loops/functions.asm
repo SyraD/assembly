@@ -6,6 +6,20 @@ section	.data           ;section defines nasm constants
     SYS_WRITE   equ 1   ;syscall #1 = sys_write
     SYS_READ    equ 0   ;syscall #0 = sys_read
     SYS_EXIT equ 60 ;syscall #60 = sys_exit
+_write_msg:
+;syscall API defined in linux kernel
+;register mapping defined by x86-64 calling convention
+    ;syswrite(rdi=int fd, rsi=const char *buf, rdx=size_t count)
+
+        ;rax is the temp register, stores number for syscall
+        mov rax,SYS_WRITE 
+
+        mov rdi,STDOUT_FILENO   ; file descriptor stored in rdi
+        mov rsi, msg    ;mov message to rsi
+        mov rdx,msg_len      ;mov message length to rdx
+
+        syscall        ;64-bit x86 prefers syscall to interrupt 0x80
+        RET        
 
 _fin:
 ;exit procedure

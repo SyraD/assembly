@@ -1,4 +1,3 @@
-
 %include    'functions.asm' ;include helper function file
 
 section	.data           ;section defines nasm constants
@@ -7,48 +6,37 @@ section	.data           ;section defines nasm constants
 
     ;initialize message
     msg: db "Program running",10 ;10 for new line
-	;msg_len	equ	$ - msg ;removed nasm len calc
+	;msg_len	equ	$ - msg 
+    ;replaced nasm length macro with _strlen
 
 section .bss            ;section defines variables
-    ;variable: resb 20  ;REServe 20 bytes
+    msg_len: resw 1  ;REServe # bytes
 
 section .text
     global _start
 
 _start:
-    mov rdi, msg
-    mov rax, rbx
 
 _strlen:
-    xor rcx,rcx
+    mov rdi, msg ;set pointer to start of message
+    xor rcx,rcx ;clear out counter
 
-_strlen_next:
-    cmp [rdi], byte NULL_TERMINATOR
-    je _calc_length
+    _strlen_while_loop:
+        cmp [rdi], byte NULL_TERMINATOR ; if (rdi == null):
+        je _save_length ; jump to _save_length
+
+        ;else:
+        inc rcx ;counter +=1
+        inc rdi ;pointer +=1
+        jmp _strlen_while_loop ;repeat
+
+    _save_length:
+        ;final count stored in rcx
+        dec rcx ;length of string is one less than count
+        mov [msg_len], rcx    ;save counted length to variable
     
-    inc rcx
-    inc rdi
-    jmp _strlen_next
-
-_calc_length:
-    mov rax, rcx
-   
-_write_msg:
-;syscall API defined in linux kernel
-;register mapping defined by x86-64 calling convention
-    ;syswrite(rdi=int fd, rsi=const char *buf, rdx=size_t count)
-
-        mov rdx,rax      ;mov message length to rdx
-
-        ;rax is the temp register, stores number for syscall
-        mov rax,SYS_WRITE 
-
-        mov rdi,STDOUT_FILENO   ; file descriptor stored in rdi
-        mov rsi, msg    ;mov message to rsi
-
-        syscall        ;64-bit x86 prefers syscall to interrupt 0x80
-        
-    call _fin
+call _write_msg
+call _fin
 
 
 

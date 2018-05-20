@@ -11,7 +11,7 @@ section	.data           ;section defines nasm constants
     input_len equ 20    ;set constant for length of user input
 
     ;initialize message
-    msg: db "Input a value",10 ;10 for new line; file descriptor 1 = stdout
+    msg: db "Input a value",10 ;10 for new line; 
 	msg_len	equ	$ - msg
 
 section .bss            ;section defines variables
@@ -32,7 +32,7 @@ _write_msg:
         mov rax,SYS_WRITE 
 
         mov rdi,STDOUT_FILENO   ; file descriptor stored in rdi
-        mov rsi, msg    ;mov message to rsiov 1 status code
+        mov rsi, msg    ;mov message to rsi
         mov rdx,msg_len      ;mov message length to rdx
         syscall        ;64-bit x86 prefers syscall to interrupt 0x80
 

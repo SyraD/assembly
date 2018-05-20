@@ -6,7 +6,7 @@ section	.data           ;section defines nasm constants
 
     ;initialize message
     msg: db "Program running",10 ;10 for new line
-	;msg_len	equ	$ - msg 
+    ;msg_len	equ	$ - msg 
     ;replaced nasm length macro with _strlen
 
 section .bss            ;section defines variables

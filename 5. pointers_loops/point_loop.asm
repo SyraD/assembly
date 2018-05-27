@@ -23,7 +23,7 @@ _strlen:
 
     _strlen_while_loop:
         cmp [rdi], byte NULL_TERMINATOR ; if (rdi == null):
-        je _save_length ; jump to _save_length
+        jz _save_length ; if zero flag set, jump to _save_length
 
         ;else:
         inc rcx ;counter +=1

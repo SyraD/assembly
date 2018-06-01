@@ -20,7 +20,7 @@ _start:
     call _write_msg ;prints var msg of length msg_len
     
     mov rdx, msg2
-    call _strlen
+    call _strlenSTK
     mov rsi, msg2
     call _write_msg    
     

@@ -42,6 +42,18 @@ _strlen:
         mov [msg_len], rax ;save length in variable       
         RET 
 
+_strlenSTK:
+;int msg_len strlen(rdx=const char *buf)
+    ;returns length of rdx as msg_len and in rax
+    push rsp
+    push rbp
+    mov rbp, rsp    ;set base and stack pointer to same value
+    push rdx    ;push msg to the stack
+    sub rbp, rsp    ;calc diff between base pointer and stack pointer
+    mov [msg_len], rbp  
+    pop rbp
+    pop rsp
+
 _fin:
 ;exit procedure
     ;void sys_exit(rdi=int error_code)
